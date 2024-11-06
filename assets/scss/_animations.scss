@@ -1,0 +1,30 @@
+// Mixin per creare un'animazione di fade in dall'alto verso il basso
+// Parametri:
+// - $duration: durata dell'animazione (default: 0.8s)
+// - $delay: ritardo prima dell'inizio dell'animazione (default: 0s)
+// - $start: posizione Y iniziale in px (default: -20px)
+// - $end: posizione Y finale (default: 0)
+// - $name: nome univoco dell'animazione (default: 'fadeDown')
+@mixin fadeInDown($duration: 0.8s, $delay: 0s, $start: -20px, $end: 0, $name: 'fadeDown') {
+  // Definizione dei keyframes dell'animazione
+  @keyframes #{$name} {
+    from {
+      opacity: 0; // Elemento inizialmente invisibile
+      transform: translateY($start); // Posizione iniziale spostata verso l'alto
+    }
+    to {
+      opacity: 1; // Elemento completamente visibile
+      transform: translateY($end); // Posizione finale
+    }
+  }
+
+  // Applicazione dell'animazione con i parametri specificati
+  // forwards mantiene lo stato finale dell'animazione
+  animation: #{$name} $duration ease-out $delay forwards;
+}
+
+// Classe di esempio che utilizza il mixin fadeInDown
+// con i parametri di default
+.animate-hero {
+  @include fadeInDown(0.8s, 0s, -20px, 0);
+} 

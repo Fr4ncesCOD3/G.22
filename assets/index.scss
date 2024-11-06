@@ -1,0 +1,174 @@
+@use 'scss/variables';
+@use 'scss/reset';
+@use 'scss/colors';
+@use 'scss/typography';
+@use 'scss/spacings';
+@use 'scss/buttons';
+@use 'scss/mixins';
+@use 'scss/animations';
+@use 'scss/breakpoints';
+
+.header {
+  background-color: white;
+  padding: 1rem;
+  
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    
+    .logo {
+      font-size: map-get(typography.$font-sizes, 'xl');
+    }
+    
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      
+      a {
+        color: #333;
+        text-decoration: none;
+        
+        &:hover {
+          color: map-get(colors.$colors, 'button-primary');
+        }
+      }
+    }
+    
+    @include breakpoints.mobile {
+      flex-direction: column;
+      gap: 1rem;
+      padding: 1rem;
+      
+      .nav-links {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+      }
+    }
+  }
+}
+
+.hero {
+  background-color: map-get(colors.$colors, 'hero-bg');
+  color: map-get(colors.$colors, 'text');
+  padding: 4rem 2rem;
+  
+  .hero-content {
+    max-width: variables.$max-width;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    
+    .hero-text {
+      @include animations.fadeInDown($name: 'heroText');
+      h1 {
+        @include typography.title-big;
+        @include animations.fadeInDown(1s, 0.2s, -30px, 0, 'heroTitle');
+      }
+      
+      p {
+        @include animations.fadeInDown(1s, 0.4s, -25px, 0, 'heroDesc');
+      }
+      
+      .buttons-group {
+        @include animations.fadeInDown(1s, 0.6s, -20px, 0, 'heroButtons');
+      }
+      
+      @include breakpoints.desktop-xl {
+        align-self: center;
+        margin-top: 2rem;
+        
+        .buttons-group {
+          display: flex;
+          gap: 1rem;
+        }
+      }
+      
+      @include breakpoints.desktop-xxl {
+        max-width: 800px;
+        
+        h1 {
+          font-size: map-get(typography.$font-sizes, 'xxl');
+        }
+        
+        p {
+          font-size: map-get(typography.$font-sizes, 'lg');
+        }
+      }
+    }
+    
+    .hero-image {
+      @include mixins.floating(12px, 1px solid rgba(255,255,255,0.2), 0 8px 16px rgba(0,0,0,0.2));
+      @include animations.fadeInDown(1s, 0.8s, -15px, 0, 'heroImage');
+      overflow: hidden;
+      
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+    
+    @include breakpoints.mobile {
+      grid-template-columns: 1fr;
+      padding: 1rem;
+      
+      .hero-image {
+        display: none;
+      }
+    }
+  }
+}
+
+.grid-section {
+  padding: 4rem 2rem;
+  
+  .grid-container {
+    max-width: variables.$max-width;
+    margin: 0 auto;
+    @include mixins.grid(4);
+    
+    .grid-item {
+      @include mixins.floating(8px, none, 0 4px 12px rgba(0,0,0,0.15));
+      background: white;
+      overflow: hidden;
+      
+      img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+      }
+      
+      h3 {
+        margin-bottom: 0.5rem;
+      }
+    }
+    
+    @include breakpoints.tablet {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    
+    @include breakpoints.mobile {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      
+      .grid-item {
+        img {
+          height: 150px;
+        }
+        
+        h3 {
+          font-size: 1.1rem;
+        }
+        
+        p {
+          font-size: 0.9rem;
+        }
+      }
+    }
+  }
+} 

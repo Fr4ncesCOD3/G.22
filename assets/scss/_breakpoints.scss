@@ -1,0 +1,41 @@
+// Mappa dei breakpoint per il responsive design
+// Definisce le larghezze standard per i diversi dispositivi
+$breakpoints: (
+  'mobile': 576px,    // Smartphone in portrait
+  'tablet': 768px,    // Tablet in portrait
+  'desktop': 992px,   // Desktop e tablet landscape
+  'xl': 1200px,       // Desktop large
+  'xxl': 1400px       // Desktop extra large
+);
+
+// Mixin per schermi mobile
+// Applica stili per dispositivi con larghezza massima di 576px
+@mixin mobile {
+  @media (max-width: map-get($breakpoints, 'mobile')) {
+    @content;
+  }
+}
+
+// Mixin per tablet
+// Applica stili per dispositivi con larghezza massima di 768px
+@mixin tablet {
+  @media (max-width: map-get($breakpoints, 'tablet')) {
+    @content;
+  }
+}
+
+// Mixin per desktop large
+// Applica stili per dispositivi con larghezza minima di 1200px
+@mixin desktop-xl {
+  @media (min-width: map-get($breakpoints, 'xl')) {
+    @content;
+  }
+}
+
+// Mixin per desktop extra large
+// Applica stili per dispositivi con larghezza minima di 1400px
+@mixin desktop-xxl {
+  @media (min-width: map-get($breakpoints, 'xxl')) {
+    @content;
+  }
+} 
